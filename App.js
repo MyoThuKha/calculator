@@ -1,11 +1,15 @@
 import { SafeAreaView, StatusBar, StyleSheet } from "react-native";
+import { Provider } from "react-redux";
 import HomePage from "./screens/home";
+import store from "./datas/store";
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <HomePage />
-    </SafeAreaView>
+    <Provider store={store}>
+      <SafeAreaView style={styles.container}>
+        <HomePage />
+      </SafeAreaView>
+    </Provider>
   );
 }
 
