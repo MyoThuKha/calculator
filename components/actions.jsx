@@ -1,7 +1,7 @@
 import { Ionicons, Feather } from "@expo/vector-icons";
 import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { changeData } from "../datas/slice";
+import { handleClear, removeDigit } from "../datas/slice";
 
 const TitleActions = () => {
   const input = useSelector((state) => state.root.data);
@@ -12,19 +12,13 @@ const TitleActions = () => {
         name="trash-outline"
         size={25}
         color="black"
-        onPres={() => dispatch(changeData(""))}
+        onPres={() => dispatch(handleClear())}
       />
       <Ionicons
         name="backspace-outline"
         size={25}
         color="black"
-        onPress={() =>
-          dispatch(
-            changeData(() => {
-              return input.slice(0, input.length - 1);
-            })
-          )
-        }
+        onPress={() => dispatch(removeDigit())}
       />
       <Feather name="percent" size={20} color="black" />
     </View>

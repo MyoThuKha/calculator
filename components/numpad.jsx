@@ -1,26 +1,30 @@
+import { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { changeData } from "../datas/slice";
+import { addDigit, changeData } from "../datas/slice";
 const NumPad = () => {
-  const input = useSelector((state) => state.root.data);
   const dispatch = useDispatch();
+  const [operand, setOperand] = useState("");
+  //
   const NumberKey = ({ num }) => {
     return (
       <TouchableOpacity
-        onPress={() =>
-          dispatch(
-            changeData(() => {
-              return input + num;
-            })
-          )
-        }
+        onPress={() => {
+          dispatch(addDigit(operand, num));
+        }}
       >
-        <View style={{ flex: 1 }}>
-          <Text style={{ fontSize: 28 }}>{num}</Text>
-        </View>
+        <Text style={{ fontSize: 28 }}>{num}</Text>
       </TouchableOpacity>
     );
   };
+  const ChangeOperand = ({ num }) => {
+    return (
+      <TouchableOpacity onPress={() => setOperand()}>
+        <Text style={{ fontSize: 28 }}>{num}</Text>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <View
       style={{
@@ -46,7 +50,7 @@ const NumPad = () => {
         <NumberKey num={9} />
         <NumberKey num={6} />
         <NumberKey num={3} />
-        <NumberKey num="+/-" />
+        <ChangeOperand num="+/-" />
       </View>
     </View>
   );
@@ -57,7 +61,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "blue",
+    backgroundColor: "gold",
   },
 });
 
