@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { addDigit, changeData } from "../datas/slice";
+import { addDigit, changeData, changeOperand } from "../datas/slice";
 const NumPad = () => {
   const dispatch = useDispatch();
 
@@ -30,7 +30,7 @@ const NumPad = () => {
         <View style={styles.row}>
           <Key add={update}>.</Key>
           <Key add={update}>0</Key>
-          <Key add={update}>0</Key>
+          <Key add={update}>+/-</Key>
         </View>
       </View>
     </View>
@@ -39,8 +39,12 @@ const NumPad = () => {
 
 const Key = ({ children, add }) => {
   return (
-    <TouchableOpacity onPress={() => add(children)}>
-      <View>
+    <TouchableOpacity
+      onPress={() => {
+        add(children);
+      }}
+    >
+      <View style={styles.button}>
         <Text style={{ fontSize: 30 }}>{children}</Text>
       </View>
     </TouchableOpacity>
@@ -58,6 +62,12 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     justifyContent: "space-around",
+  },
+  button: {
+    width: 60,
+    height: 60,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

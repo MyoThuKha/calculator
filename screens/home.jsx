@@ -12,7 +12,7 @@ const HomePage = () => {
       <View style={styles.head}>
         <Text style={styles.title}>Calculator</Text>
         <View>
-          <Text>{current.previous}</Text>
+          <Text style={styles.previous}>{current.previous}</Text>
           <View style={styles.display}>
             <Text style={styles.current}>{current.operator}</Text>
             <Text style={styles.current}>{current.data}</Text>
@@ -53,6 +53,12 @@ const styles = StyleSheet.create({
   },
   numpad: {
     flex: 1,
+  },
+  previous: {
+    textAlign: "right",
+    color: "gray",
+    fontSize: 18,
+    marginBottom: 20,
   },
   display: {
     flexDirection: "row",
