@@ -5,13 +5,19 @@ import Operators from "../components/operators";
 import TitleActions from "../components/actions";
 
 const HomePage = () => {
-  const input = useSelector((state) => state.root.data);
+  const current = useSelector((state) => state.root);
 
   return (
     <View style={styles.container}>
       <View style={styles.head}>
         <Text style={styles.title}>Calculator</Text>
-        <Text>{input}</Text>
+        <View>
+          <Text>{current.previous}</Text>
+          <View style={styles.display}>
+            <Text style={styles.current}>{current.operator}</Text>
+            <Text style={styles.current}>{current.data}</Text>
+          </View>
+        </View>
       </View>
       <View style={styles.body}>
         <View style={styles.numpad}>
@@ -47,6 +53,15 @@ const styles = StyleSheet.create({
   },
   numpad: {
     flex: 1,
+  },
+  display: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 50,
+  },
+
+  current: {
+    fontSize: 30,
   },
 });
 

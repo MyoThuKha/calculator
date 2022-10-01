@@ -1,16 +1,30 @@
 import { Ionicons, Feather } from "@expo/vector-icons";
 import { StyleSheet, View } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { handleClear, removeDigit } from "../datas/slice";
+import { useDispatch } from "react-redux";
+import { handleClear, handlePercent, removeDigit } from "../datas/slice";
 
 const TitleActions = () => {
-  const input = useSelector((state) => state.root.data);
   const dispatch = useDispatch();
   return (
     <View style={styles.titleActions}>
-      <Ionicons name="trash-outline" size={25} color="black" />
-      <Ionicons name="backspace-outline" size={25} color="black" />
-      <Feather name="percent" size={20} color="black" />
+      <Ionicons
+        name="trash-outline"
+        size={25}
+        color="black"
+        onPress={() => dispatch(handleClear())}
+      />
+      <Ionicons
+        name="backspace-outline"
+        size={25}
+        color="black"
+        onPress={() => dispatch(removeDigit())}
+      />
+      <Feather
+        name="percent"
+        size={20}
+        color="black"
+        onPress={() => dispatch(handlePercent())}
+      />
     </View>
   );
 };

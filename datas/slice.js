@@ -1,7 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  data: "",
+  data: "12345",
+  previous: "",
+  operator: "",
+  list: [],
 };
 
 const slice = createSlice({
@@ -9,23 +12,25 @@ const slice = createSlice({
   initialState,
   reducers: {
     addDigit: (state, action) => {
-      const value = action.payload.operand + action.payload.num;
-      state.data.push(action.payload);
+      state.data += action.payload;
     },
     removeDigit: (state) => {
-      state.data.pop();
-    },
-    changeSign: (state) => {
-      const digit = state.data[state.data.length - 1];
-      const change = digit > 0 ? digit + 2 * digit : digit - 2 * digit;
-      state.data = state.data.pop().push(change);
+      state.data = state.data.slice(0, state.data.length - 1);
     },
     handleClear: (state) => {
-      state.data = [];
+      state.data = "";
+      state.operator = "";
+      state.previous = "";
+    },
+    handlePercent: (state) => {
+      state.previous = state.data;
+      state.operator = "%";
+      state.data = parseFloat(state.data) / 100;
     },
     handleOperate: (state) => {},
     handleEvaluate: (state) => {},
   },
 });
-export const { addDigit, handleClear, removeDigit } = slice.actions;
+export const { addDigit, handleClear, removeDigit, handlePercent } =
+  slice.actions;
 export default slice.reducer;
