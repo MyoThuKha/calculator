@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   head: {
-    flex: 2,
+    flex: 1,
     marginHorizontal: 30,
     marginVertical: 10,
     justifyContent: "space-between",
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
   },
   body: {
-    flex: 3,
+    flex: 1,
     backgroundColor: "white",
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,

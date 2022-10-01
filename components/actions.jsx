@@ -8,18 +8,8 @@ const TitleActions = () => {
   const dispatch = useDispatch();
   return (
     <View style={styles.titleActions}>
-      <Ionicons
-        name="trash-outline"
-        size={25}
-        color="black"
-        onPres={() => dispatch(handleClear())}
-      />
-      <Ionicons
-        name="backspace-outline"
-        size={25}
-        color="black"
-        onPress={() => dispatch(removeDigit())}
-      />
+      <Ionicons name="trash-outline" size={25} color="black" />
+      <Ionicons name="backspace-outline" size={25} color="black" />
       <Feather name="percent" size={20} color="black" />
     </View>
   );
