@@ -1,12 +1,12 @@
-import { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { addDigit, changeData, changeOperand } from "../datas/slice";
+import { useDispatch } from "react-redux";
+import { addDigit, changeOperand } from "../datas/slice";
+
 const NumPad = () => {
   const dispatch = useDispatch();
 
   const update = (num) => {
-    dispatch(addDigit(num));
+    dispatch(num != "+/-" ? addDigit(num) : changeOperand());
   };
 
   return (

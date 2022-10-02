@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import NumPad from "../components/numpad";
 import Operators from "../components/operators";
 import TitleActions from "../components/actions";
+import { useState } from "react";
 
 const HomePage = () => {
   const current = useSelector((state) => state.root);
@@ -15,7 +16,7 @@ const HomePage = () => {
           <Text style={styles.previous}>{current.previous}</Text>
           <View style={styles.display}>
             <Text style={styles.current}>{current.operator}</Text>
-            <Text style={styles.current}>{current.data}</Text>
+            <Text style={styles.current}>{current.current}</Text>
           </View>
         </View>
       </View>
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   head: {
-    flex: 1,
+    flex: 2,
     marginHorizontal: 30,
     marginVertical: 10,
     justifyContent: "space-between",
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
   },
   body: {
-    flex: 1,
+    flex: 3,
     backgroundColor: "white",
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
   },
 
   current: {
-    fontSize: 30,
+    fontSize: 40,
   },
 });
 

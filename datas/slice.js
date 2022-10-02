@@ -1,10 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  data: "",
+  current: "",
   previous: "",
   operator: "",
-  list: [],
 };
 
 const slice = createSlice({
@@ -12,33 +11,50 @@ const slice = createSlice({
   initialState,
   reducers: {
     addDigit: (state, action) => {
-      let result = state.data + action.payload;
-      //if key is change operand
-      if (action.payload === "+/-") {
-        result = parseFloat(state.data) * -1;
-      }
-      //0 and .
-      if (action.payload === "0" && state.data === "0") return;
-      if (action.payload === "." && state.data.includes(".")) return;
-      state.data = result;
+      if (action.payload === "0" && state.current === "0") return;
+      if (action.payload === "." && state.current.includes(".")) return;
+      state.current = state.current + action.payload;
+    },
+    changeOperand: (state) => {
+      state.current = parseFloat(state.current) * -1;
     },
     removeDigit: (state) => {
-      state.data = state.data.slice(0, state.data.length - 1);
+      state.current = state.current.slice(0, state.current.length - 1);
     },
     handleClear: (state) => {
-      state.data = "";
+      state.current = "";
       state.operator = "";
       state.previous = "";
     },
     handlePercent: (state) => {
-      state.previous = state.data;
+      state.previous = state.current;
       state.operator = "%";
-      state.data = parseFloat(state.data) / 100;
+      state.current = parseFloat(state.current) / 100;
     },
-    handleOperate: (state, action) => {},
-    handleEvaluate: (state) => {},
+    handleOperate: (state, action) => {
+      if (state.current === "") return;
+      if (state.previous !== "") {
+        state.current = eval(state.previous + state.operator + state.current);
+      }
+      state.previous = state.current;
+      state.operator = action.payload;
+      state.current = "";
+    },
+
+    handleEvaluate: (state) => {
+      let compute;
+      if (state.current === "") {
+        compute = state.previous;
+      } else {
+        compute = eval(state.previous + state.operator + state.current);
+      }
+      state.operator = "=";
+      state.current = compute;
+      state.previous = "";
+    },
   },
 });
-export const { addDigit, handleClear, removeDigit, handlePercent } =
-  slice.actions;
+export const { addDigit, changeOperand } = slice.actions;
+export const { handleClear, removeDigit, handlePercent } = slice.actions;
+export const { handleOperate, handleEvaluate } = slice.actions;
 export default slice.reducer;

@@ -1,6 +1,7 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
+import { handleEvaluate, handleOperate } from "../datas/slice";
 
 const Operators = () => {
   const signColor = "#16b862";
@@ -9,14 +10,36 @@ const Operators = () => {
   return (
     <View style={styles.operation}>
       <View style={styles.operator}>
-        <MaterialCommunityIcons name="division" size={25} color={signColor} />
-        <AntDesign name="close" size={24} color={signColor} />
-        <AntDesign name="minus" size={24} color={signColor} />
-        <AntDesign name="plus" size={24} color={signColor} />
+        <MaterialCommunityIcons
+          name="division"
+          size={25}
+          color={signColor}
+          onPress={() => dispatch(handleOperate("/"))}
+        />
+        <AntDesign
+          name="close"
+          size={24}
+          color={signColor}
+          onPress={() => dispatch(handleOperate("*"))}
+        />
+        <AntDesign
+          name="minus"
+          size={24}
+          color={signColor}
+          onPress={() => dispatch(handleOperate("-"))}
+        />
+        <AntDesign
+          name="plus"
+          size={24}
+          color={signColor}
+          onPress={() => dispatch(handleOperate("+"))}
+        />
       </View>
-      <View style={styles.equal}>
-        <MaterialCommunityIcons name="equal" size={24} color="white" />
-      </View>
+      <TouchableOpacity onPress={() => dispatch(handleEvaluate())}>
+        <View style={styles.equal}>
+          <MaterialCommunityIcons name="equal" size={24} color="white" />
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
