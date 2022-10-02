@@ -4,6 +4,7 @@ const initialState = {
   current: "",
   previous: "",
   operator: "",
+  log: "",
 };
 
 const slice = createSlice({
@@ -33,6 +34,7 @@ const slice = createSlice({
     },
     handleOperate: (state, action) => {
       if (state.current === "") return;
+      state.log = state.log + state.operator + state.current;
       if (state.previous !== "") {
         state.current = eval(state.previous + state.operator + state.current);
       }

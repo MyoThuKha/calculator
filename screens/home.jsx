@@ -13,7 +13,7 @@ const HomePage = () => {
       <View style={styles.head}>
         <Text style={styles.title}>Calculator</Text>
         <View>
-          <Text style={styles.previous}>{current.previous}</Text>
+          <Text style={styles.previous}>{current.equation}</Text>
           <View style={styles.display}>
             <Text style={styles.current}>{current.operator}</Text>
             <Text style={styles.current}>{current.current}</Text>
