@@ -2,7 +2,10 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
 import { addDigit, changeOperand } from "../datas/slice";
 
-const NumPad = () => {
+let color = "";
+
+const NumPad = ({ textColor }) => {
+  color = textColor;
   const dispatch = useDispatch();
 
   const update = (num) => {
@@ -45,7 +48,7 @@ const Key = ({ children, add }) => {
       }}
     >
       <View style={styles.button}>
-        <Text style={{ fontSize: 30 }}>{children}</Text>
+        <Text style={{ fontSize: 30, color: color }}>{children}</Text>
       </View>
     </TouchableOpacity>
   );

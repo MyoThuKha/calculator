@@ -26,6 +26,7 @@ const slice = createSlice({
       state.current = "";
       state.operator = "";
       state.previous = "";
+      state.log = "";
     },
     handlePercent: (state) => {
       state.previous = state.current;

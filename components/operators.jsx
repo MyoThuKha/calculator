@@ -3,13 +3,13 @@ import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { handleEvaluate, handleOperate } from "../datas/slice";
 
-const Operators = () => {
+const Operators = ({ headColor }) => {
   const signColor = "#16b862";
   const input = useSelector((state) => state.root.data);
   const dispatch = useDispatch();
   return (
     <View style={styles.operation}>
-      <View style={styles.operator}>
+      <View style={[{ backgroundColor: headColor }, styles.operator]}>
         <MaterialCommunityIcons
           name="division"
           size={25}
@@ -53,7 +53,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-around",
     alignItems: "center",
-    backgroundColor: "#f8f8f8",
     borderRadius: 20,
     width: 70,
   },
